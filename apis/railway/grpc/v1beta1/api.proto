@@ -4,7 +4,7 @@ package v1beta1;
 option go_package = "apis/railway/grpc/v1beta1";
 
 service Railway {
-    rpc City (Empty) returns (CityResponse) {
+    rpc GetCity (Empty) returns (CityResponse) {
     }
 }
 
