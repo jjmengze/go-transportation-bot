@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package v1beta1;
+option go_package = "apis/railway/grpc/v1beta1";
+
+service Railway {
+    rpc City (Empty) returns (CityResponse) {
+    }
+}
+
+message Empty {
+}
+
+message CityResponse {
+    repeated City city = 1;
+}
+
+message City {
+    string ID = 1;
+    string name = 2;
+}
