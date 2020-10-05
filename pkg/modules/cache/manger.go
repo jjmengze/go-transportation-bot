@@ -27,7 +27,6 @@ func GetManager() *Manager {
 		manager = &Manager{
 			RedisConnections: make(map[string]*redisClientHolder),
 		}
-
 	}
 	return manager
 }
