@@ -21,6 +21,7 @@ func New(s *grpc.Server, railwaySvc railway.RailwayService) *RailwayController {
 }
 
 func (c *RailwayController) GetCity(context.Context, *v1beta1.Empty) (*v1beta1.CityResponse, error) {
+	c.railwaySvc.ScanCity()
 	return &v1beta1.CityResponse{
 		City: []*v1beta1.City{
 			{

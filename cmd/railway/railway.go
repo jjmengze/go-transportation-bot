@@ -4,6 +4,7 @@ import (
 	"github.com/spf13/cobra"
 	"go-transportation-bot/cmd/railway/app"
 	"go-transportation-bot/pkg/controller/railway"
+	railwayCrawler "go-transportation-bot/pkg/crawler/railway"
 	"go-transportation-bot/pkg/modules/cache"
 	"go-transportation-bot/pkg/repository"
 	"go-transportation-bot/pkg/service"
@@ -58,8 +59,14 @@ func NewAPIServerCommand() *cobra.Command {
 
 func Run(option *app.ServerRunOptions, stopCh <-chan struct{}) error {
 
+	//third party resource
 	cacheManger := cache.GetManager()
-	railwayRepo := repository.NewRailwayRepository(cacheManger.GetRedisClient("127.0.0.1:6379"))
+	rc := railwayCrawler.NewRailwayCrawler()
+
+	//repository depend on third party resource
+	railwayRepo := repository.NewRailwayRepository(cacheManger.GetRedisClient("127.0.0.1:6379"), rc)
+
+	//service layer depend on repository layer
 	railwaySvc := service.NewRailwayService(railwayRepo)
 
 	lis, err := net.Listen("tcp", option.IP+":"+option.Port)
@@ -67,6 +74,7 @@ func Run(option *app.ServerRunOptions, stopCh <-chan struct{}) error {
 		klog.ErrorS(err, "Grpc start error occur: %s")
 	}
 	s := grpc.NewServer()
+	//controller provides api, it just a entrance which will call service function .
 	railway.New(s, railwaySvc)
 
 	return s.Serve(lis)

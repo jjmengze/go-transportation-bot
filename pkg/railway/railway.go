@@ -1,6 +1,9 @@
 package railway
 
-import "context"
+import (
+	"context"
+	"go-transportation-bot/pkg/crawler/railway"
+)
 
 type Railway struct {
 	ID         string `json:"id"`
@@ -16,10 +19,13 @@ type City struct {
 }
 
 type RailwayRepository interface {
+	PutAllCity(ctx context.Context, cities []City) error
+	railway.RailwayCrawler
 	GetCity(ctx context.Context, stationID string) (*City, error)
 	//GetStation(ctx context.Context, d *City) error
 	//GetStatus(ctx context.Context) error
 }
 type RailwayService interface {
 	GetCity(ctx context.Context) ([]City, error)
+	ScanCity()
 }

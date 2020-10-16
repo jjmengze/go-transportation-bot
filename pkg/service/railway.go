@@ -2,6 +2,8 @@ package service
 
 import (
 	"context"
+	"fmt"
+	"github.com/gocolly/colly/v2"
 	"go-transportation-bot/pkg/railway"
 )
 
@@ -17,4 +19,10 @@ func NewRailwayService(railwayRepo railway.RailwayRepository) railway.RailwaySer
 	return &railwayService{
 		railwayRepo: railwayRepo,
 	}
+}
+
+func (r *railwayService) ScanCity() {
+	r.railwayRepo.ScanCity(func(e *colly.HTMLElement) {
+		fmt.Println(e)
+	})
 }
