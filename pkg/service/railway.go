@@ -23,6 +23,7 @@ func NewRailwayService(railwayRepo railway.RailwayRepository) railway.RailwaySer
 
 func (r *railwayService) ScanCity() {
 	r.railwayRepo.ScanCity(func(e *colly.HTMLElement) {
-		fmt.Println(e)
+		fmt.Println(e.Attr("data-type"))
+		fmt.Println(e.Text)
 	})
 }

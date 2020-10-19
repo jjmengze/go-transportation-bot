@@ -61,7 +61,7 @@ func Run(option *app.ServerRunOptions, stopCh <-chan struct{}) error {
 
 	//third party resource
 	cacheManger := cache.GetManager()
-	rc := railwayCrawler.NewRailwayCrawler()
+	rc := railwayCrawler.NewRailwayCrawle(railwayCrawler.URL)
 
 	//repository depend on third party resource
 	railwayRepo := repository.NewRailwayRepository(cacheManger.GetRedisClient("127.0.0.1:6379"), rc)
