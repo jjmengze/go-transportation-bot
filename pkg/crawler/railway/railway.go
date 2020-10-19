@@ -3,6 +3,7 @@ package railway
 import (
 	"github.com/gocolly/colly/v2"
 	"k8s.io/klog/v2"
+	"net/http"
 )
 
 type RailwayCrawle struct {
@@ -27,10 +28,9 @@ func (rc *RailwayCrawle) ScanCity(f func(e *colly.HTMLElement)) () {
 	scanCity(rc.baseURL, f)
 }
 
-
 //todo:需要修改成英文
 //實際到台鐵爬city的過程
-func scanCity(api string, f func(e *colly.HTMLElement)) {
+func scanCity(api string, f func(e *colly.HTMLElement)) error {
 	var c = colly.NewCollector()
 
 	c.OnHTML(".line-inner li button[class='btn tipCity']", f)
@@ -39,5 +39,6 @@ func scanCity(api string, f func(e *colly.HTMLElement)) {
 		klog.Info("scan city with url:", api)
 	})
 
-	c.Post(api, nil)
+	err := c.Request(http.MethodGet, api, nil, nil, nil)
+	return err
 }
