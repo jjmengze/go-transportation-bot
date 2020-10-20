@@ -30,6 +30,7 @@ func (rc *RailwayCrawle) ScanCity(f func(e *colly.HTMLElement)) () {
 
 //todo:需要修改成英文
 //實際到台鐵爬city的過程
+//注意本操作是同步操作！
 func scanCity(api string, f func(e *colly.HTMLElement)) error {
 	var c = colly.NewCollector()
 

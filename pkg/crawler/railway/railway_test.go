@@ -1,7 +1,6 @@
 package railway
 
 import (
-	"bytes"
 	"github.com/gocolly/colly/v2"
 	"net/http"
 	"net/http/httptest"
@@ -71,7 +70,7 @@ func TestRailwayCrawleScanCity(t *testing.T) {
 }
 
 func TestScanCity(t *testing.T) {
-	const endPoint = "city"
+	const endPoint = "/city"
 
 	testData := map[string]string{
 		"city10017": "基隆市",
@@ -82,6 +81,20 @@ func TestScanCity(t *testing.T) {
 		api string
 		f   func(e *colly.HTMLElement)
 	}
+
+	testServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodGet {
+			t.Error("Request method should be Get")
+		}
+
+		if r.RequestURI != endPoint {
+			t.Error("Request URI should be " + endPoint)
+		}
+		w.Header().Set("Content-Type", "text/html")
+		w.Write([]byte(mockTestCityID))
+	}))
+	defer testServer.Close()
+
 	tests := []struct {
 		name string
 		args args
@@ -89,7 +102,7 @@ func TestScanCity(t *testing.T) {
 		{
 			name: "scan city id ",
 			args: args{
-				api: endPoint,
+				api: testServer.URL + endPoint,
 				f: func(e *colly.HTMLElement) {
 					if testData[e.Attr("data-type")] != e.Text {
 						t.Error("Scan city ID Error")
@@ -98,20 +111,6 @@ func TestScanCity(t *testing.T) {
 			},
 		},
 	}
-
-	testServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.Method != "Get" {
-			t.Error("Request method should be Get")
-		}
-
-		if r.RequestURI != endPoint {
-			t.Error("Request URI should be " + endPoint)
-		}
-		_ = r.Write(bytes.NewBufferString(mockTestCityID))
-
-		w.WriteHeader(http.StatusInternalServerError)
-	}))
-	defer testServer.Close()
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
