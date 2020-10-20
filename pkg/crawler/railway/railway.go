@@ -12,6 +12,7 @@ type RailwayCrawle struct {
 
 type RailwayCrawler interface {
 	ScanCity(f func(e *colly.HTMLElement))
+	ScanStationByCityID(cityID string, f func(e *colly.HTMLElement))
 }
 
 const (
@@ -35,6 +36,27 @@ func scanCity(api string, f func(e *colly.HTMLElement)) error {
 	var c = colly.NewCollector()
 
 	c.OnHTML(".line-inner li button[class='btn tipCity']", f)
+
+	c.OnRequest(func(r *colly.Request) {
+		klog.Info("scan city with url:", api)
+	})
+
+	err := c.Request(http.MethodGet, api, nil, nil, nil)
+	return err
+}
+
+func (rc *RailwayCrawle) ScanStationByCityID(cityID string, f func(e *colly.HTMLElement)) () {
+	scanStationByCityID(rc.baseURL, cityID, f)
+}
+
+//todo:需要修改成英文
+//實際到台鐵爬站名與編號的過程
+//注意本操作是同步操作！
+func scanStationByCityID(api string, cityID string, f func(e *colly.HTMLElement)) error {
+	querySegment := "#" + cityID + " button"
+	var c = colly.NewCollector()
+
+	c.OnHTML(querySegment, f)
 
 	c.OnRequest(func(r *colly.Request) {
 		klog.Info("scan city with url:", api)
