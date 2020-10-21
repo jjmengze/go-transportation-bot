@@ -3,6 +3,7 @@ module go-transportation-bot
 go 1.13
 
 require (
+	github.com/PuerkitoBio/goquery v1.5.0
 	github.com/go-redis/redis/v8 v8.2.3
 	github.com/gocolly/colly/v2 v2.0.1
 	github.com/golang/protobuf v1.4.2
