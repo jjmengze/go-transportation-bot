@@ -22,7 +22,7 @@ func (o *ServerRunOptions) AddFlags(fs *pflag.FlagSet) {
 		return
 	}
 
-	fs.StringVar(&o.IP, "serving-address", o.IP, "The IP serving railway query")
-	fs.StringVar(&o.Redis, "redis-address", o.Redis, "The IP is connection to redis")
-	fs.StringVar(&o.Port, "port", o.Port, "The port serving railway query service")
+	fs.StringVar(&o.IP, "serving-address", "127.0.0.1", "The IP serving railway query")
+	fs.StringVar(&o.Redis, "redis-address", "127.0.0.1:6379", "The IP is connection to redis")
+	fs.StringVar(&o.Port, "port", "8080", "The port serving railway query service")
 }

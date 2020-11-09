@@ -16,7 +16,7 @@ func (m *mockRailwayRepo) GetCity(ctx context.Context, stationID string) (*railw
 	return nil, nil
 }
 
-func (m *mockRailwayRepo) PutAllCity(ctx context.Context, cities []railway.City) error {
+func (m *mockRailwayRepo) PutAllCity(ctx context.Context, cities []*railway.City) error {
 	return nil
 }
 
@@ -79,7 +79,7 @@ func TestRailwayServiceScanCity(t *testing.T) {
 			r := &railwayService{
 				railwayRepo: tt.fields.railwayRepo,
 			}
-			r.ScanCity()
+			r.ScanCity(context.Background())
 		})
 	}
 }
