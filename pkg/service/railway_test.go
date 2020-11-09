@@ -61,6 +61,11 @@ func (m *mockRailwayRepo) ScanCity(f func(e *colly.HTMLElement)) () {
 func (m *mockRailwayRepo) ScanStationByCityID(cityID string, f func(e *colly.HTMLElement)) () {
 }
 
+func (r *mockRailwayRepo) GetAllCity(ctx context.Context) ([]*railway.City, error) {
+
+	return nil, nil
+}
+
 func TestRailwayServiceScanCity(t *testing.T) {
 	type fields struct {
 		railwayRepo railway.RailwayRepository

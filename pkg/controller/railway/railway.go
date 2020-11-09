@@ -22,7 +22,8 @@ func New(s *grpc.Server, railwaySvc railway.RailwayService) *RailwayController {
 }
 
 func (c *RailwayController) GetCity(ctx context.Context, empty *v1beta1.Empty) (*v1beta1.CityResponse, error) {
-	cityList, err := c.railwaySvc.ScanCity(ctx)
+	cityList, err := c.railwaySvc.GetAllCity(ctx)
+	//cityList, err := c.railwaySvc.ScanCity(ctx)
 	if err != nil {
 		klog.Warning("Get City Error", err)
 		return nil, err

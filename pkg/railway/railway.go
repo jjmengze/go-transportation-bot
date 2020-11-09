@@ -23,10 +23,12 @@ type RailwayRepository interface {
 	PutAllCity(ctx context.Context, cities []*City) error
 	railway.RailwayCrawler
 	GetCity(ctx context.Context, stationID string) (*City, error)
+	GetAllCity(ctx context.Context) ([]*City, error)
 	//GetStation(ctx context.Context, d *City) error
 	//GetStatus(ctx context.Context) error
 }
 type RailwayService interface {
 	GetCity(ctx context.Context, cityID string) (*City, error)
-	ScanCity(ctx context.Context)([]*City, error)
+	GetAllCity(ctx context.Context) ([]*City, error)
+	ScanCity(ctx context.Context) ([]*City, error)
 }
