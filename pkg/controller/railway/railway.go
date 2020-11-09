@@ -5,6 +5,7 @@ import (
 	"go-transportation-bot/apis/railway/grpc/v1beta1"
 	"go-transportation-bot/pkg/railway"
 	"google.golang.org/grpc"
+	"k8s.io/klog/v2"
 )
 
 type RailwayController struct {
@@ -21,21 +22,19 @@ func New(s *grpc.Server, railwaySvc railway.RailwayService) *RailwayController {
 }
 
 func (c *RailwayController) GetCity(ctx context.Context, empty *v1beta1.Empty) (*v1beta1.CityResponse, error) {
-	c.railwaySvc.ScanCity(ctx)
+	cityList, err := c.railwaySvc.ScanCity(ctx)
+	if err != nil {
+		klog.Warning("Get City Error", err)
+		return nil, err
+	}
+	respCityList := make([]*v1beta1.City, len(cityList))
+	for i := 0; i < len(cityList); i++ {
+		respCityList[i] = &v1beta1.City{
+			ID:   cityList[i].Id,
+			Name: cityList[i].Name,
+		}
+	}
 	return &v1beta1.CityResponse{
-		City: []*v1beta1.City{
-			{
-				ID:   "100",
-				Name: "Keelung",
-			},
-			{
-				ID:   "101",
-				Name: "taipei",
-			},
-			{
-				ID:   "102",
-				Name: "e.t.c.",
-			},
-		},
+		City: respCityList,
 	}, nil
 }

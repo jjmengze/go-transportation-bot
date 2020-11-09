@@ -28,5 +28,5 @@ type RailwayRepository interface {
 }
 type RailwayService interface {
 	GetCity(ctx context.Context, cityID string) (*City, error)
-	ScanCity(ctx context.Context)
+	ScanCity(ctx context.Context)([]*City, error)
 }

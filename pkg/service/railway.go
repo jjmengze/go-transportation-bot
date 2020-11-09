@@ -21,7 +21,7 @@ func NewRailwayService(railwayRepo railway.RailwayRepository) railway.RailwaySer
 	}
 }
 
-func (r *railwayService) ScanCity(ctx context.Context) {
+func (r *railwayService) ScanCity(ctx context.Context) ([]*railway.City, error) {
 	cityList := make([]*railway.City, 0)
 	r.railwayRepo.ScanCity(func(e *colly.HTMLElement) {
 		//fmt.Println(e.Attr("data-type"))
@@ -34,5 +34,7 @@ func (r *railwayService) ScanCity(ctx context.Context) {
 	})
 	if err := r.railwayRepo.PutAllCity(ctx, cityList); err != nil {
 		klog.Warning("PutAllCity to cache server error :")
+		return nil, err
 	}
+	return cityList, nil
 }
