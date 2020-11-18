@@ -59,7 +59,7 @@ func scanStationByCityID(api string, cityID string, f func(e *colly.HTMLElement)
 	c.OnHTML(querySegment, f)
 
 	c.OnRequest(func(r *colly.Request) {
-		klog.Info("scan city with url:", api)
+		klog.Info("scan station with url:", api)
 	})
 
 	err := c.Request(http.MethodGet, api, nil, nil, nil)

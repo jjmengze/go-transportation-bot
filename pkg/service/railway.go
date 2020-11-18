@@ -7,6 +7,7 @@ import (
 	"go-transportation-bot/pkg/railway"
 	"go-transportation-bot/pkg/repository"
 	"k8s.io/klog/v2"
+	"strings"
 )
 
 type railwayService struct {
@@ -36,6 +37,10 @@ func (r *railwayService) GetAllCity(ctx context.Context) ([]*railway.City, error
 	return cities, nil
 }
 
+func (r *railwayService) GetStation(ctx context.Context, cityID string) ([]*railway.Station, error) {
+	return getStation(r.railwayRepo, cityID), nil
+}
+
 func (r *railwayService) ScanCity(ctx context.Context) ([]*railway.City, error) {
 	cityList := reScanCity(r.railwayRepo)
 	if err := putAllCity(ctx, r.railwayRepo, cityList); err != nil {
@@ -59,4 +64,18 @@ func reScanCity(railwayCrawler railwayCrawler.RailwayCrawler) []*railway.City {
 
 func putAllCity(ctx context.Context, railwayRepository railway.RailwayRepository, cities []*railway.City) error {
 	return railwayRepository.PutAllCity(ctx, cities)
+}
+
+func getStation(railwayCrawler railwayCrawler.RailwayCrawler, cityID string) []*railway.Station {
+	stationList := make([]*railway.Station, 0)
+	railwayCrawler.ScanStationByCityID(cityID, func(e *colly.HTMLElement) {
+
+		station := &railway.Station{
+			Name: e.Text,
+			Id:   strings.Split(e.Attr("title"), "-")[0],
+		}
+		stationList = append(stationList, station)
+	})
+
+	return stationList
 }

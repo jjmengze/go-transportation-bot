@@ -39,3 +39,21 @@ func (c *RailwayController) GetCity(ctx context.Context, empty *v1beta1.Empty) (
 		City: respCityList,
 	}, nil
 }
+
+func (c *RailwayController) GetStationByCityID(ctx context.Context, cityRequest *v1beta1.City) (*v1beta1.StationResponse, error) {
+	stationList, err := c.railwaySvc.GetStation(ctx, cityRequest.ID)
+	if err != nil {
+		klog.Warning("Get City Error", err)
+		return nil, err
+	}
+	respStationList := make([]*v1beta1.Station, len(stationList))
+	for i := 0; i < len(stationList); i++ {
+		respStationList[i] = &v1beta1.Station{
+			Id:   stationList[i].Id,
+			Name: stationList[i].Name,
+		}
+	}
+	return &v1beta1.StationResponse{
+		Station: respStationList,
+	}, nil
+}

@@ -6,9 +6,20 @@ option go_package = "apis/railway/grpc/v1beta1";
 service Railway {
     rpc GetCity (Empty) returns (CityResponse) {
     }
+    rpc GetStationByCityID (City) returns (StationResponse) {
+    }
 }
 
 message Empty {
+}
+
+message StationResponse {
+    repeated Station station = 1;
+}
+
+message Station {
+    string name = 1;
+    string id = 2;
 }
 
 message CityResponse {

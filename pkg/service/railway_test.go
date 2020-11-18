@@ -13,11 +13,18 @@ type mockRailwayRepo struct {
 }
 
 func (m *mockRailwayRepo) GetCity(ctx context.Context, stationID string) (*railway.City, error) {
+	//todo lose get all city mock function
 	return nil, nil
 }
 
 func (m *mockRailwayRepo) PutAllCity(ctx context.Context, cities []*railway.City) error {
+	//todo lose put all city mock function
 	return nil
+}
+
+func (r *railwayService) GetStation() ([]*railway.Station, error) {
+	//todo lose get station mock function
+	return nil, nil
 }
 
 func (m *mockRailwayRepo) ScanCity(f func(e *colly.HTMLElement)) () {
@@ -59,10 +66,11 @@ func (m *mockRailwayRepo) ScanCity(f func(e *colly.HTMLElement)) () {
 }
 
 func (m *mockRailwayRepo) ScanStationByCityID(cityID string, f func(e *colly.HTMLElement)) () {
+	//todo lose scan station by city id mock function
 }
 
 func (r *mockRailwayRepo) GetAllCity(ctx context.Context) ([]*railway.City, error) {
-
+	//todo lose get all city test case
 	return nil, nil
 }
 

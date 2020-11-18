@@ -67,6 +67,108 @@ func (*Empty) Descriptor() ([]byte, []int) {
 	return file_api_proto_rawDescGZIP(), []int{0}
 }
 
+type StationResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Station []*Station `protobuf:"bytes,1,rep,name=station,proto3" json:"station,omitempty"`
+}
+
+func (x *StationResponse) Reset() {
+	*x = StationResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *StationResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StationResponse) ProtoMessage() {}
+
+func (x *StationResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StationResponse.ProtoReflect.Descriptor instead.
+func (*StationResponse) Descriptor() ([]byte, []int) {
+	return file_api_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *StationResponse) GetStation() []*Station {
+	if x != nil {
+		return x.Station
+	}
+	return nil
+}
+
+type Station struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Id   string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *Station) Reset() {
+	*x = Station{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Station) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Station) ProtoMessage() {}
+
+func (x *Station) ProtoReflect() protoreflect.Message {
+	mi := &file_api_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Station.ProtoReflect.Descriptor instead.
+func (*Station) Descriptor() ([]byte, []int) {
+	return file_api_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *Station) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *Station) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
 type CityResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -78,7 +180,7 @@ type CityResponse struct {
 func (x *CityResponse) Reset() {
 	*x = CityResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_proto_msgTypes[1]
+		mi := &file_api_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -91,7 +193,7 @@ func (x *CityResponse) String() string {
 func (*CityResponse) ProtoMessage() {}
 
 func (x *CityResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[1]
+	mi := &file_api_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -104,7 +206,7 @@ func (x *CityResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CityResponse.ProtoReflect.Descriptor instead.
 func (*CityResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{1}
+	return file_api_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *CityResponse) GetCity() []*City {
@@ -126,7 +228,7 @@ type City struct {
 func (x *City) Reset() {
 	*x = City{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_proto_msgTypes[2]
+		mi := &file_api_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -139,7 +241,7 @@ func (x *City) String() string {
 func (*City) ProtoMessage() {}
 
 func (x *City) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[2]
+	mi := &file_api_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -152,7 +254,7 @@ func (x *City) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use City.ProtoReflect.Descriptor instead.
 func (*City) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{2}
+	return file_api_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *City) GetID() string {
@@ -173,19 +275,30 @@ var File_api_proto protoreflect.FileDescriptor
 
 var file_api_proto_rawDesc = []byte{
 	0x0a, 0x09, 0x61, 0x70, 0x69, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x07, 0x76, 0x31, 0x62,
-	0x65, 0x74, 0x61, 0x31, 0x22, 0x07, 0x0a, 0x05, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x31, 0x0a,
-	0x0c, 0x43, 0x69, 0x74, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x21, 0x0a,
-	0x04, 0x63, 0x69, 0x74, 0x79, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0d, 0x2e, 0x76, 0x31,
-	0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x43, 0x69, 0x74, 0x79, 0x52, 0x04, 0x63, 0x69, 0x74, 0x79,
-	0x22, 0x2a, 0x0a, 0x04, 0x43, 0x69, 0x74, 0x79, 0x12, 0x0e, 0x0a, 0x02, 0x49, 0x44, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x49, 0x44, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65,
-	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x32, 0x3d, 0x0a, 0x07,
-	0x52, 0x61, 0x69, 0x6c, 0x77, 0x61, 0x79, 0x12, 0x32, 0x0a, 0x07, 0x47, 0x65, 0x74, 0x43, 0x69,
-	0x74, 0x79, 0x12, 0x0e, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x45, 0x6d, 0x70,
-	0x74, 0x79, 0x1a, 0x15, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x43, 0x69, 0x74,
-	0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x1b, 0x5a, 0x19, 0x61,
-	0x70, 0x69, 0x73, 0x2f, 0x72, 0x61, 0x69, 0x6c, 0x77, 0x61, 0x79, 0x2f, 0x67, 0x72, 0x70, 0x63,
-	0x2f, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x65, 0x74, 0x61, 0x31, 0x22, 0x07, 0x0a, 0x05, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x3d, 0x0a,
+	0x0f, 0x53, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x12, 0x2a, 0x0a, 0x07, 0x73, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x03, 0x28,
+	0x0b, 0x32, 0x10, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x53, 0x74, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x52, 0x07, 0x73, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x2d, 0x0a, 0x07,
+	0x53, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69,
+	0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x31, 0x0a, 0x0c, 0x43,
+	0x69, 0x74, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x21, 0x0a, 0x04, 0x63,
+	0x69, 0x74, 0x79, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0d, 0x2e, 0x76, 0x31, 0x62, 0x65,
+	0x74, 0x61, 0x31, 0x2e, 0x43, 0x69, 0x74, 0x79, 0x52, 0x04, 0x63, 0x69, 0x74, 0x79, 0x22, 0x2a,
+	0x0a, 0x04, 0x43, 0x69, 0x74, 0x79, 0x12, 0x0e, 0x0a, 0x02, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x02, 0x49, 0x44, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x32, 0x7e, 0x0a, 0x07, 0x52, 0x61,
+	0x69, 0x6c, 0x77, 0x61, 0x79, 0x12, 0x32, 0x0a, 0x07, 0x47, 0x65, 0x74, 0x43, 0x69, 0x74, 0x79,
+	0x12, 0x0e, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79,
+	0x1a, 0x15, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x43, 0x69, 0x74, 0x79, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x3f, 0x0a, 0x12, 0x47, 0x65, 0x74,
+	0x53, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x42, 0x79, 0x43, 0x69, 0x74, 0x79, 0x49, 0x44, 0x12,
+	0x0d, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x43, 0x69, 0x74, 0x79, 0x1a, 0x18,
+	0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x1b, 0x5a, 0x19, 0x61, 0x70,
+	0x69, 0x73, 0x2f, 0x72, 0x61, 0x69, 0x6c, 0x77, 0x61, 0x79, 0x2f, 0x67, 0x72, 0x70, 0x63, 0x2f,
+	0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -200,21 +313,26 @@ func file_api_proto_rawDescGZIP() []byte {
 	return file_api_proto_rawDescData
 }
 
-var file_api_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_api_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_api_proto_goTypes = []interface{}{
-	(*Empty)(nil),        // 0: v1beta1.Empty
-	(*CityResponse)(nil), // 1: v1beta1.CityResponse
-	(*City)(nil),         // 2: v1beta1.City
+	(*Empty)(nil),           // 0: v1beta1.Empty
+	(*StationResponse)(nil), // 1: v1beta1.StationResponse
+	(*Station)(nil),         // 2: v1beta1.Station
+	(*CityResponse)(nil),    // 3: v1beta1.CityResponse
+	(*City)(nil),            // 4: v1beta1.City
 }
 var file_api_proto_depIdxs = []int32{
-	2, // 0: v1beta1.CityResponse.city:type_name -> v1beta1.City
-	0, // 1: v1beta1.Railway.GetCity:input_type -> v1beta1.Empty
-	1, // 2: v1beta1.Railway.GetCity:output_type -> v1beta1.CityResponse
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	2, // 0: v1beta1.StationResponse.station:type_name -> v1beta1.Station
+	4, // 1: v1beta1.CityResponse.city:type_name -> v1beta1.City
+	0, // 2: v1beta1.Railway.GetCity:input_type -> v1beta1.Empty
+	4, // 3: v1beta1.Railway.GetStationByCityID:input_type -> v1beta1.City
+	3, // 4: v1beta1.Railway.GetCity:output_type -> v1beta1.CityResponse
+	1, // 5: v1beta1.Railway.GetStationByCityID:output_type -> v1beta1.StationResponse
+	4, // [4:6] is the sub-list for method output_type
+	2, // [2:4] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_api_proto_init() }
@@ -236,7 +354,7 @@ func file_api_proto_init() {
 			}
 		}
 		file_api_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CityResponse); i {
+			switch v := v.(*StationResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -248,6 +366,30 @@ func file_api_proto_init() {
 			}
 		}
 		file_api_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Station); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_api_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CityResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_api_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*City); i {
 			case 0:
 				return &v.state
@@ -266,7 +408,7 @@ func file_api_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_api_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -293,6 +435,7 @@ const _ = grpc.SupportPackageIsVersion6
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type RailwayClient interface {
 	GetCity(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*CityResponse, error)
+	GetStationByCityID(ctx context.Context, in *City, opts ...grpc.CallOption) (*StationResponse, error)
 }
 
 type railwayClient struct {
@@ -312,9 +455,19 @@ func (c *railwayClient) GetCity(ctx context.Context, in *Empty, opts ...grpc.Cal
 	return out, nil
 }
 
+func (c *railwayClient) GetStationByCityID(ctx context.Context, in *City, opts ...grpc.CallOption) (*StationResponse, error) {
+	out := new(StationResponse)
+	err := c.cc.Invoke(ctx, "/v1beta1.Railway/GetStationByCityID", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // RailwayServer is the server API for Railway service.
 type RailwayServer interface {
 	GetCity(context.Context, *Empty) (*CityResponse, error)
+	GetStationByCityID(context.Context, *City) (*StationResponse, error)
 }
 
 // UnimplementedRailwayServer can be embedded to have forward compatible implementations.
@@ -323,6 +476,9 @@ type UnimplementedRailwayServer struct {
 
 func (*UnimplementedRailwayServer) GetCity(context.Context, *Empty) (*CityResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCity not implemented")
+}
+func (*UnimplementedRailwayServer) GetStationByCityID(context.Context, *City) (*StationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetStationByCityID not implemented")
 }
 
 func RegisterRailwayServer(s *grpc.Server, srv RailwayServer) {
@@ -347,6 +503,24 @@ func _Railway_GetCity_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Railway_GetStationByCityID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(City)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RailwayServer).GetStationByCityID(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v1beta1.Railway/GetStationByCityID",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RailwayServer).GetStationByCityID(ctx, req.(*City))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Railway_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "v1beta1.Railway",
 	HandlerType: (*RailwayServer)(nil),
@@ -354,6 +528,10 @@ var _Railway_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCity",
 			Handler:    _Railway_GetCity_Handler,
+		},
+		{
+			MethodName: "GetStationByCityID",
+			Handler:    _Railway_GetStationByCityID_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

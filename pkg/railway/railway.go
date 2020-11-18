@@ -19,6 +19,11 @@ type City struct {
 	Id   string `json:"id"`
 }
 
+type Station struct {
+	Name string `json:"name"`
+	Id   string `json:"id"`
+}
+
 type RailwayRepository interface {
 	PutAllCity(ctx context.Context, cities []*City) error
 	railway.RailwayCrawler
@@ -31,4 +36,5 @@ type RailwayService interface {
 	GetCity(ctx context.Context, cityID string) (*City, error)
 	GetAllCity(ctx context.Context) ([]*City, error)
 	ScanCity(ctx context.Context) ([]*City, error)
+	GetStation(ctx context.Context, cityID string) ([]*Station, error)
 }
