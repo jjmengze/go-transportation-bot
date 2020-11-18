@@ -27,7 +27,7 @@ install-proto-gen:
 
 .PHONY: gen-go-protobuf
 gen-go-protobuf:
-	@protoc -I ./apis/railway/grpc/v1beta1 api.proto --go_out=./apis/railway/grpc/v1beta1/ --go_out=plugins=grpc:.
+	@protoc -I ./apis/railway/grpc/v1beta1 api.proto --go_out=plugins=grpc:.
 
 build:
 	@echo "building transportation binary in $(BIN_DIR)"
