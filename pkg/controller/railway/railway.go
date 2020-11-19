@@ -5,6 +5,7 @@ import (
 	"go-transportation-bot/apis/railway/grpc/v1beta1"
 	"go-transportation-bot/pkg/railway"
 	"google.golang.org/grpc"
+	"google.golang.org/protobuf/types/known/timestamppb"
 	"k8s.io/klog/v2"
 )
 
@@ -55,5 +56,36 @@ func (c *RailwayController) GetStationByCityID(ctx context.Context, cityRequest 
 	}
 	return &v1beta1.StationResponse{
 		Station: respStationList,
+	}, nil
+}
+
+func (c *RailwayController) GetInfoByStation(ctx context.Context, trainInfoRequest *v1beta1.TrainInfoRequest) (*v1beta1.TrainInfoResponse, error) {
+	request := &railway.InfoRequest{
+		FromId:      trainInfoRequest.FromId,
+		ToId:        trainInfoRequest.ToId,
+		TrainNumber: trainInfoRequest.TrainNumber,
+		FromTimes:   trainInfoRequest.FromTimes,
+		ToTimes:     trainInfoRequest.ToTimes,
+		//Type:        int(trainInfoRequest.Type),
+	}
+	trainInfoList, err := c.railwaySvc.GetInfoByStation(ctx, request)
+	if err != nil {
+		klog.Warning("Get TrainInfo Error", err)
+		return nil, err
+	}
+	trainInfoListResponse := make([]*v1beta1.TrainInfo, len(trainInfoList))
+	for i := 0; i < len(trainInfoList); i++ {
+		trainInfoListResponse[i] = &v1beta1.TrainInfo{
+			TrainNo:       trainInfoList[i].TrainNumber,
+			TotalTime:     trainInfoList[i].ToTimes.Unix() - trainInfoList[i].FromTimes.Unix(),
+			Roadmap:       "山線",
+			FromTimes:     &timestamppb.Timestamp{Seconds: trainInfoList[i].FromTimes.Unix()},
+			ToTimes:       &timestamppb.Timestamp{Seconds: trainInfoList[i].ToTimes.Unix()},
+			AuditPrice:    100,
+			DiscountPrice: 10,
+		}
+	}
+	return &v1beta1.TrainInfoResponse{
+		TrainInfo: trainInfoListResponse,
 	}, nil
 }

@@ -2,7 +2,9 @@ package railway
 
 import (
 	"context"
+	"github.com/golang/protobuf/ptypes/timestamp"
 	"go-transportation-bot/pkg/crawler/railway"
+	"time"
 )
 
 type Railway struct {
@@ -24,6 +26,32 @@ type Station struct {
 	Id   string `json:"id"`
 }
 
+type InfoRequest struct {
+	FromId      string
+	ToId        string
+	TrainNumber string
+	FromTimes   *timestamp.Timestamp
+	ToTimes     *timestamp.Timestamp
+	Type        Type
+}
+
+type Info struct {
+	FromId      string
+	ToId        string
+	TrainNumber string
+	FromTimes   time.Time
+	ToTimes     time.Time
+	Type        Type
+}
+
+type Type int32
+
+const (
+	TIMES Type = iota
+	STATION
+	NUMBER
+)
+
 type RailwayRepository interface {
 	PutAllCity(ctx context.Context, cities []*City) error
 	railway.RailwayCrawler
@@ -37,4 +65,5 @@ type RailwayService interface {
 	GetAllCity(ctx context.Context) ([]*City, error)
 	ScanCity(ctx context.Context) ([]*City, error)
 	GetStation(ctx context.Context, cityID string) ([]*Station, error)
+	GetInfoByStation(ctx context.Context, infoRequest *InfoRequest) ([]*Info, error)
 }

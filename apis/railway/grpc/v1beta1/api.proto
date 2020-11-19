@@ -3,10 +3,14 @@ syntax = "proto3";
 package v1beta1;
 option go_package = "apis/railway/grpc/v1beta1";
 
+import "google/protobuf/timestamp.proto";
+
 service Railway {
     rpc GetCity (Empty) returns (CityResponse) {
     }
     rpc GetStationByCityID (City) returns (StationResponse) {
+    }
+    rpc GetInfoByStation (TrainInfoRequest) returns (TrainInfoResponse) {
     }
 }
 
@@ -15,6 +19,35 @@ message Empty {
 
 message StationResponse {
     repeated Station station = 1;
+}
+
+message TrainInfoRequest {
+    string from_id = 1;
+    string to_id = 2;
+    string train_number = 3;
+    google.protobuf.Timestamp from_times = 4;
+    google.protobuf.Timestamp to_times = 5;
+    Type type = 6;
+}
+
+enum Type {
+    TIMES = 0;
+    STATION = 1;
+    NUMBER = 2;
+}
+
+message TrainInfoResponse {
+    repeated TrainInfo trainInfo = 1;
+}
+
+message TrainInfo {
+    string train_no = 1;
+    int64 total_time = 2;
+    string roadmap = 3;
+    google.protobuf.Timestamp from_times = 4;
+    google.protobuf.Timestamp to_times = 5;
+    int32 audit_price = 6;
+    int32 discount_price = 7;
 }
 
 message Station {

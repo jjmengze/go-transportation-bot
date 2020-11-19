@@ -8,6 +8,7 @@ import (
 	"go-transportation-bot/pkg/repository"
 	"k8s.io/klog/v2"
 	"strings"
+	"time"
 )
 
 type railwayService struct {
@@ -48,6 +49,26 @@ func (r *railwayService) ScanCity(ctx context.Context) ([]*railway.City, error) 
 		return nil, err
 	}
 	return cityList, nil
+}
+
+func (r *railwayService) GetInfoByStation(ctx context.Context, infoRequest *railway.InfoRequest) ([]*railway.Info, error) {
+	//cityList := reScanCity(r.railwayRepo)
+	//if err := putAllCity(ctx, r.railwayRepo, cityList); err != nil {
+	//	klog.Warning("PutAllCity to cache server error :")
+	//	return nil, err
+	//}
+	trainInfoList := []*railway.Info{
+		{
+			FromId:      "HIJK",
+			ToId:        "ABCD",
+			TrainNumber: "1234",
+			FromTimes:   time.Now(),
+			ToTimes:     time.Now().Add(time.Hour),
+			Type:        railway.TIMES,
+		},
+	}
+
+	return trainInfoList, nil
 }
 
 func reScanCity(railwayCrawler railwayCrawler.RailwayCrawler) []*railway.City {
